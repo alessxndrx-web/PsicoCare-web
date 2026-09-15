@@ -26,7 +26,7 @@ export default function Page() {
     </Container></section>
 
     <section className="section-space" id="modelo"><Container>
-      <SectionHeading eyebrow="Cómo funciona el modelo" title={<>Más herramientas para la institución.<br/>La misma privacidad para el estudiante.</>}>Si cualquier joven ya puede usar PsicoCare gratis, ¿qué incorpora una institución? No una versión mejor de la app: la infraestructura para desplegar, organizar, medir y sostener sus iniciativas de bienestar.</SectionHeading>
+      <SectionHeading eyebrow="Cómo funciona el modelo" title={<>Más herramientas para la institución. <br/>La misma privacidad para el estudiante.</>}>Si cualquier joven ya puede usar PsicoCare gratis, ¿qué incorpora una institución? No una versión mejor de la app: la infraestructura para desplegar, organizar, medir y sostener sus iniciativas de bienestar.</SectionHeading>
       <div className="compare-grid">
         <article className="compare-card is-free">
           <div className="compare-head"><Eyebrow>Para cualquier joven</Eyebrow><h3>PsicoCare gratis</h3><p>La experiencia personal completa, sin pertenecer a ninguna institución y sin pagar.</p></div>
@@ -89,7 +89,7 @@ export default function Page() {
     </Container></section>
 
     <section className="plans-section section-space" id="programas"><Container>
-      <SectionHeading eyebrow="Formas de implementarlo" title="Elijan el punto de partida.">Tres maneras de incorporar PsicoCare a una institución educativa, según el momento en el que estén.</SectionHeading>
+      <SectionHeading eyebrow="Formas de implementarlo" title="Elige el punto de partida.">Tres maneras de incorporar PsicoCare a una institución educativa, según el momento en el que estés.</SectionHeading>
       <div className="plans-grid">{institutionalPlans.map(plan => <article className={"plan-card" + (plan.highlight ? " is-highlight" : "")} key={plan.id}>
         {plan.highlight && <span className="plan-badge">Programa principal</span>}
         <h3>{plan.name}</h3><p className="plan-summary">{plan.summary}</p>
@@ -111,8 +111,8 @@ export default function Page() {
       <SectionHeading eyebrow="Cómo empezamos" title="Un proceso corto y claro.">Sin compromisos hasta que el alcance esté definido por ambas partes.</SectionHeading>
       <ol className="process-steps">{institutionalProcess.map(step => <li key={step.step}><span className="process-number">{step.step}</span><div><h3>{step.title}</h3><p>{step.body}</p></div></li>)}</ol>
       <p className="development-note"><Icon name="shield" size={19}/>{DEVELOPMENT_NOTE}</p>
-      <div className="process-cta"><h2>Conversemos sobre su institución.</h2>
-        <p>Escríbannos y coordinamos una primera conversación para entender su contexto.</p>
+      <div className="process-cta"><h2>Conversemos sobre tu institución.</h2>
+        <p>Escríbenos y coordinamos una primera conversación para entender tu contexto.</p>
         <div className="button-row"><ButtonLink href="/#contacto">Solicitar información</ButtonLink><a className="button button-ghost" href={`mailto:${site.email}`}>{site.email}</a></div></div>
     </Container></section>
   </>;

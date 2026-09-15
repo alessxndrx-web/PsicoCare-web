@@ -42,7 +42,7 @@ export const institutionalLayer = [
 ] as const;
 export const advancedLayer = [
   "Inicio de sesión institucional (SSO)", "Integraciones con sistemas propios", "API",
-  "Despliegue multi-campus", "Implementación a medida", "Soporte prioritario acordado",
+  "Despliegue multicampus", "Implementación a medida", "Soporte prioritario acordado",
 ] as const;
 
 export const educationMoments = [
@@ -80,10 +80,10 @@ export const institutionalPlans = [
   },
   {
     id: "custom", name: "Programa a medida", price: "A convenir", unit: "según alcance y duración",
-    summary: "Para redes educativas, universidades multi-campus, ONG y programas públicos de mayor escala.",
+    summary: "Para redes educativas, universidades multicampus, ONG y programas públicos de mayor escala.",
     highlight: false, cta: "Hablar sobre el proyecto",
     note: "Pensado para iniciativas que abarcan varias sedes o instituciones.",
-    includes: ["Todo lo del programa institucional", "Implementación a medida", "Integraciones institucionales", "Programas adaptados", "Estructura multi-sede", "Capacitación del equipo", "Informes propios", "SSO y API cuando aplique"],
+    includes: ["Todo lo del programa institucional", "Implementación a medida", "Integraciones institucionales", "Programas adaptados", "Estructura multisede", "Capacitación del equipo", "Informes propios", "SSO y API cuando aplique"],
   },
 ] as const;
 
@@ -93,7 +93,7 @@ export const collaborationTracks = [
 ] as const;
 
 export const institutionalProcess = [
-  { step: "01", title: "Conversación inicial", body: "Nos cuentan su contexto, su población y qué necesitan resolver. Sin compromiso." },
+  { step: "01", title: "Conversación inicial", body: "Nos cuentas tu contexto, tu población y qué necesitas resolver. Sin compromiso." },
   { step: "02", title: "Propuesta de alcance", body: "Definimos modalidad, número de personas, duración y qué se medirá." },
   { step: "03", title: "Acuerdo y puesta en marcha", body: "Firmamos las condiciones, incluido el tratamiento de datos, y preparamos el acceso." },
   { step: "04", title: "Acompañamiento y revisión", body: "Revisamos resultados agregados de forma periódica y ajustamos lo que haga falta." },

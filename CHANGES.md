@@ -1,5 +1,15 @@
 # Cambios
 
+## 2026-09-14 — Correcciones de texto y de saltos de línea en móvil
+
+- Se corrige la causa de las palabras pegadas en móvil: tres reglas ocultaban los `<br>` en pantallas pequeñas sin dejar separación, de modo que «sustituye» y «la atención» se unían. Ahora todos los saltos llevan un espacio delante, así que ocultarlos es seguro.
+- Se cambia el eslogan de la demo, que se prestaba a doble lectura, por «Conócela por dentro, antes que nadie».
+- Se corrige un texto que había quedado falso en la sección de seguridad: la encuesta sí ofrece un correo opcional al final.
+- Se unifica el tratamiento en la página de educación, que mezclaba «tú» y «ustedes».
+- Se escriben «multicampus» y «multisede» sin guion, según la norma para prefijos.
+- El verificador de despliegue ya distingue entre «falta DATABASE_URL» y «faltan las migraciones», que requieren soluciones distintas.
+
+
 ## 2026-09-14 — PostgreSQL, cuentas por persona y tabla de respuestas
 
 - Se migra el almacenamiento de SQLite a PostgreSQL para poder desplegar en Vercel, donde el sistema de archivos es efímero. Toda la capa de datos pasa a ser asíncrona con `pg` y un pool por instancia.

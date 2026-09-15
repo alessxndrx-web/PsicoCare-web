@@ -44,19 +44,22 @@ async function main() {
   else if (canonical.startsWith(base)) add("ok", "SITE_URL", `Coincide con el dominio: ${canonical}`);
   else add("falta", "SITE_URL", `Apunta a ${canonical} en lugar de ${base}. Configúrala en Vercel y vuelve a desplegar.`);
 
-  // 5. The survey API tells us whether the database is reachable AND seeded.
+  // 5. Two signals together separate "no connection string" from "tables never created":
+  //    the admin page only reaches the user query when DATABASE_URL exists.
   const api = await get(`/api/surveys/${SURVEY_SLUG}`);
-  if (api.status === 200) {
+  const adminHtml = await (await get("/admin/encuestas")).text();
+  const envMissing = adminHtml.includes("almacenamiento todavía no está configurado");
+  const apiOk = api.status === 200;
+
+  if (apiOk) {
     const data = await api.json() as { survey?: { questions?: unknown[] } };
     const count = data.survey?.questions?.length ?? 0;
     add(count === 14 ? "ok" : "aviso", "Base de datos y encuesta",
       count === 14 ? "Conectada y con las 14 preguntas sembradas." : `Conectada, pero la encuesta tiene ${count} preguntas.`);
-  } else if (api.status === 503) {
-    add("falta", "Base de datos", "Responde 503: falta DATABASE_URL en Vercel, o la base no acepta conexiones.");
-  } else if (api.status === 404) {
-    add("falta", "Encuesta sembrada", "La base responde pero la encuesta no existe. Ejecuta db:setup contra la base de producción.");
+  } else if (envMissing) {
+    add("falta", "DATABASE_URL", "No está configurada en Vercel. Créala desde Storage > Create Database (Neon) y vuelve a desplegar.");
   } else {
-    add("falta", "Base de datos", `La API responde ${api.status}.`);
+    add("falta", "Migraciones", `DATABASE_URL sí está configurada, pero la base responde con error (API ${api.status}). Lo más probable es que falten las tablas: ejecuta db:setup contra la base de producción.`);
   }
 
   // 6. Origin enforcement must reject cross-site writes.
@@ -67,14 +70,14 @@ async function main() {
   add(forged.status === 403 ? "ok" : "aviso", "Protección de origen",
     forged.status === 403 ? "Las peticiones de otro origen se rechazan con 403." : `Devuelve ${forged.status}; se esperaba 403.`);
 
-  // 7. The admin page states whether any account exists, without exposing data.
-  const admin = await get("/admin/encuestas");
-  const adminHtml = await admin.text();
+  // 7. Whether any team account exists (only meaningful once storage works).
   if (adminHtml.includes("Escuchar para construir")) add("aviso", "Panel interno", "Se está sirviendo sin pedir sesión. Revísalo de inmediato.");
-  else if (adminHtml.includes("Todavía no hay ninguna cuenta creada")) add("falta", "Cuentas del equipo", "No existe ninguna cuenta. Ejecuta team:bootstrap contra la base de producción.");
-  else if (adminHtml.includes("todavía no está configurado")) add("falta", "Panel interno", "El panel no encuentra la base de datos.");
+  else if (envMissing) add("falta", "Cuentas del equipo", "No se puede comprobar: falta la base de datos.");
   else if (adminHtml.includes("Entra con tu cuenta")) add("ok", "Cuentas del equipo", "Hay al menos una cuenta y el panel pide inicio de sesión.");
-  else add("aviso", "Panel interno", `Estado no reconocido (HTTP ${admin.status}).`);
+  else if (adminHtml.includes("Todavía no hay ninguna cuenta creada")) add("falta", "Cuentas del equipo",
+    apiOk ? "La base funciona pero no hay ninguna cuenta. Ejecuta team:bootstrap contra la base de producción."
+          : "Sin cuentas, y la base tampoco responde: resuelve primero las migraciones.");
+  else add("aviso", "Panel interno", "Estado no reconocido.");
 
   // 8. Google sign-in is optional; report which path visitors will see.
   const survey = await get("/encuestas");

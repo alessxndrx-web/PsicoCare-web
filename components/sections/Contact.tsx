@@ -9,7 +9,7 @@ export function Contact() {
   const [error, setError] = useState("");
   const requestId = useRef("");
   return <section className="contact-section section-space" id="contacto"><Container><div className="contact-layout">
-    <div><SectionHeading eyebrow="Hablemos" title={<>Un buen siguiente paso<br/>puede ser una conversación.</>}>¿Representas a una universidad, un colegio, un instituto o una organización que trabaja con juventud? Cuéntanos tu contexto y coordinamos una primera conversación.</SectionHeading>
+    <div><SectionHeading eyebrow="Hablemos" title={<>Un buen siguiente paso <br/>puede ser una conversación.</>}>¿Representas a una universidad, un colegio, un instituto o una organización que trabaja con juventud? Cuéntanos tu contexto y coordinamos una primera conversación.</SectionHeading>
       <ul className="contact-direct"><li><Icon name="mail" size={18}/><a href={`mailto:${site.email}`}>{site.email}</a></li><li><Icon name="check" size={18}/><a href={`tel:${site.phoneHref}`}>{site.phone}</a></li></ul>
       <div className="contact-note"><Icon name="mail"/><p>Tu mensaje llegará al buzón interno del equipo. Tus datos de contacto se mantienen separados de las encuestas.</p></div></div>
     {status === "success" ? <div className="contact-success" role="status"><Icon name="check" size={40}/><h3>Gracias por acercarte.</h3><p>Tu mensaje quedó guardado en el buzón de PsicoCare para que el equipo pueda revisarlo.</p><button className="text-action" onClick={() => { setStatus("idle"); requestId.current = ""; }}>Escribir otro mensaje<Icon name="arrow" size={17}/></button></div> :
