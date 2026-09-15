@@ -6,20 +6,45 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --env-file-if-exists=.env.local --test --test-concurrency=1 tests/*.test.ts",
+    "test:e2e": "playwright test",
+    "db:setup": "tsx --env-file-if-exists=.env.local scripts/database.ts setup",
+    "db:migrate": "tsx --env-file-if-exists=.env.local scripts/database.ts migrate",
+    "db:seed": "tsx --env-file-if-exists=.env.local scripts/database.ts seed",
+    "db:purge": "tsx --env-file-if-exists=.env.local scripts/database.ts purge",
+    "team:bootstrap": "tsx --env-file-if-exists=.env.local scripts/database.ts bootstrap"
   },
   "dependencies": {
+    "@fontsource-variable/montserrat": "^5.3.0",
+    "@fontsource/lora": "^5.3.0",
     "framer-motion": "^12.23.12",
-    "next": "^15.5.4",
+    "next": "^15.5.25",
+    "pg": "^8.23.0",
     "react": "^19.1.1",
-    "react-dom": "^19.1.1"
+    "react-dom": "^19.1.1",
+    "zod": "^4.6.5"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@playwright/test": "^1.63.0",
     "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^24.5.2",
+    "@types/pg": "^8.23.1",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^15.5.25",
     "tailwindcss": "^4.1.13",
+    "tsx": "^4.23.13",
     "typescript": "^5.9.2"
+  },
+  "engines": {
+    "node": ">=24.14.0 <25"
+  },
+  "overrides": {
+    "postcss": "^8.5.23",
+    "sharp": "^0.35.4"
   }
 }

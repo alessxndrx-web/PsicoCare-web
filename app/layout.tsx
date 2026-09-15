@@ -1,68 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
 import { site } from "@/lib/content";
+import "@fontsource-variable/montserrat";
+import "@fontsource/lora/latin-400.css";
+import "@fontsource/lora/latin-400-italic.css";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-inter",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500"],
-  variable: "--font-mono-jb",
-});
-
+const base = process.env.SITE_URL ? new URL(process.env.SITE_URL) : undefined;
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.tagline}`,
+  metadataBase: base,
+  title: { default: "PsicoCare — Acompañamiento emocional para jóvenes", template: "%s | PsicoCare" },
   description: site.description,
-  keywords: [
-    "PsicoCare",
-    "inteligencia artificial",
-    "salud mental",
-    "psicología",
-    "Hackathon Nicaragua 2026",
-    "acompañamiento",
-    "jóvenes",
-  ],
-  authors: [{ name: `Equipo ${site.name}` }],
-  openGraph: {
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-    type: "website",
-    locale: "es_NI",
-    siteName: site.name,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `${site.name} — ${site.tagline}`,
-    description: site.description,
-  },
+  openGraph: { title: "PsicoCare — Tu bienestar importa.", description: site.description, type: "website", locale: "es_NI", siteName: site.name },
+  twitter: { card: "summary_large_image", title: "PsicoCare — Tu bienestar importa.", description: site.description },
   robots: { index: true, follow: true },
 };
-
-export const viewport: Viewport = {
-  themeColor: "#04070f",
-  colorScheme: "dark",
-};
-
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="es" className={`${inter.variable} ${jetbrains.variable}`}>
-      <body className="antialiased">
-        <a
-          href="#contenido"
-          className="sr-only rounded-full bg-ink-800 px-5 py-3 text-sm text-on-dark focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-100"
-        >
-          Saltar al contenido
-        </a>
-        {children}
-      </body>
-    </html>
-  );
+export const viewport: Viewport = { themeColor: "#000022", colorScheme: "light dark" };
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  return <html lang="es"><body><a href="#contenido" className="skip-link">Saltar al contenido</a><Navbar/><main id="contenido">{children}</main><Footer/></body></html>;
 }
