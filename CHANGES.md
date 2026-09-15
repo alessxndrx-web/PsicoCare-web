@@ -1,5 +1,12 @@
 # Cambios
 
+## 2026-09-14 — Analítica de audiencia
+
+- Se incorpora la analítica web de Vercel en las páginas públicas.
+- El panel interno no carga el script, y los parámetros y fragmentos de la dirección se eliminan antes de enviar nada, de modo que marcas del recorrido como `?correo=ok` no salen del sitio.
+- Se corrige la página de privacidad, que afirmaba que no se usaba analítica alguna. Ahora describe qué se mide, que incluye un identificador técnico del dispositivo y que no se cruza con encuestas ni contactos.
+
+
 ## 2026-09-14 — Recuperación de contraseñas del equipo
 
 - Se añaden `npm run team:list` y `npm run team:password`. Sin servicio de correo no había ninguna forma de recuperar una contraseña perdida: la cuenta quedaba inaccesible para siempre.
