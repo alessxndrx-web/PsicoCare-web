@@ -1,7 +1,7 @@
 import { test, after, before } from "node:test";
 import assert from "node:assert/strict";
 import { one, query } from "../lib/database";
-import { changePassword, countUsers, createUser, hashPassword, listUsers, passwordProblem, setUserDisabled, signIn, verifyPassword } from "../lib/server/auth";
+import { changePassword, countUsers, createUser, hashPassword, listUsers, passwordProblem, resetPasswordByEmail, setUserDisabled, signIn, verifyPassword } from "../lib/server/auth";
 import { resetDatabase, teardown } from "./helpers";
 
 before(resetDatabase);
@@ -61,5 +61,20 @@ test("each team member has a separate account and changing one password does not
   // A password handed over by someone else must be rotated; changing it clears the flag for that account only.
   assert.equal(users.find(u => u.email === "otra@psicocare.test")!.mustChangePassword, false);
   assert.equal(users.find(u => u.email === "equipo@psicocare.test")!.mustChangePassword, true);
+  await query("DELETE FROM team_users");
+});
+test("an operator reset replaces the password, revokes sessions and forces a rotation", async () => {
+  await createUser({ email: "perdida@psicocare.test", name: "Contraseña perdida", password: STRONG, mustChangePassword: false });
+  const id = String((await one("SELECT id FROM team_users WHERE email = $1", ["perdida@psicocare.test"]))!.id);
+  assert.ok(await signIn("perdida@psicocare.test", STRONG), "the account works before the reset");
+  assert.ok(Number((await one<{ n: string }>("SELECT COUNT(*)::text AS n FROM team_sessions WHERE user_id = $1", [id]))!.n) > 0);
+
+  await resetPasswordByEmail("PERDIDA@psicocare.test", "clave-nueva-del-equipo-2026");
+  assert.equal(Number((await one<{ n: string }>("SELECT COUNT(*)::text AS n FROM team_sessions WHERE user_id = $1", [id]))!.n), 0, "live sessions are dropped");
+  assert.equal(await signIn("perdida@psicocare.test", STRONG), null, "the old password stops working");
+  assert.ok(await signIn("perdida@psicocare.test", "clave-nueva-del-equipo-2026"));
+  assert.equal((await listUsers()).find(u => u.email === "perdida@psicocare.test")!.mustChangePassword, true, "the person must rotate it");
+
+  await assert.rejects(() => resetPasswordByEmail("nadie@psicocare.test", "clave-nueva-del-equipo-2026"), /No existe/);
   await query("DELETE FROM team_users");
 });

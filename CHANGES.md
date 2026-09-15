@@ -1,5 +1,11 @@
 # Cambios
 
+## 2026-09-14 — Recuperación de contraseñas del equipo
+
+- Se añaden `npm run team:list` y `npm run team:password`. Sin servicio de correo no había ninguna forma de recuperar una contraseña perdida: la cuenta quedaba inaccesible para siempre.
+- Restablecer una contraseña cierra todas las sesiones abiertas de esa cuenta y obliga a cambiarla en el siguiente acceso.
+
+
 ## 2026-09-14 — La marca pasa a «Psico Care»
 
 - Se escribe la marca como «Psico Care», en dos palabras, en los 100 textos visibles del sitio. No se tocan el correo de contacto, el identificador de la encuesta ni los nombres de infraestructura, que van en minúscula y romperían enlaces o datos ya guardados.

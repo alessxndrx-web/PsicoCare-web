@@ -16,7 +16,9 @@
     "db:purge": "tsx --env-file-if-exists=.env.local scripts/database.ts purge",
     "team:bootstrap": "tsx --env-file-if-exists=.env.local scripts/database.ts bootstrap",
     "check:deploy": "tsx scripts/check-deployment.ts",
-    "build:check": "next build"
+    "build:check": "next build",
+    "team:password": "tsx --env-file-if-exists=.env.local scripts/database.ts password",
+    "team:list": "tsx --env-file-if-exists=.env.local scripts/database.ts users"
   },
   "dependencies": {
     "@fontsource-variable/montserrat": "^5.3.0",

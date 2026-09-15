@@ -1,6 +1,6 @@
 import { randomBytes } from "node:crypto";
 import { closePool, enforceRetention, migrate, query } from "../lib/database";
-import { countUsers, createUser, MIN_PASSWORD_LENGTH, passwordProblem } from "../lib/server/auth";
+import { countUsers, createUser, listUsers, MIN_PASSWORD_LENGTH, passwordProblem, resetPasswordByEmail } from "../lib/server/auth";
 import { seedSurvey } from "../lib/surveys/repository";
 import { initialSurvey } from "../lib/surveys/initial-survey";
 
@@ -37,6 +37,26 @@ async function main() {
     console.log(`  Correo:      ${email}`);
     console.log(`  Contraseña:  ${password}`);
     console.log(`Cámbiala al entrar. Mínimo ${MIN_PASSWORD_LENGTH} caracteres.`);
+  }
+
+  /** Recovery path for a lost password: there is no email service to do it in-app. */
+  if (action === "password") {
+    const email = process.argv[3];
+    if (!email) fail("Uso: npm run team:password -- correo@ejemplo.com");
+    const password = process.env.NEW_PASSWORD ?? randomBytes(9).toString("base64url");
+    const problem = passwordProblem(password);
+    if (problem) fail(`La contraseña indicada no es válida: ${problem}`);
+    await resetPasswordByEmail(email, password);
+    console.log("Contraseña restablecida. Las sesiones abiertas de esa cuenta se cerraron.");
+    console.log(`  Correo:      ${email}`);
+    console.log(`  Contraseña:  ${password}`);
+    console.log("Cámbiala al entrar.");
+  }
+
+  if (action === "users") {
+    const users = await listUsers();
+    if (!users.length) console.log("No hay ninguna cuenta.");
+    for (const u of users) console.log(`  ${u.disabled ? "[inactiva]" : "[activa]  "} ${u.email}  ${u.name}`);
   }
 
   if (action === "retention") { await enforceRetention(); console.log("Retención comprobada."); }

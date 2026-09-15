@@ -126,3 +126,19 @@ Compilar con el `SITE_URL` real y ejecutar el mismo proyecto con `npm run start`
 SQLite necesita **un servidor/una instancia con disco persistente**. No desplegar este almacenamiento en un filesystem efímero o compartido entre réplicas sin revisar la arquitectura. Para múltiples instancias, migrar el repositorio de datos a una base relacional gestionada preservando el modelo y los contratos de la API.
 
 Antes de una apertura pública, concretar identidad del responsable de datos, canal de solicitudes, alojamiento, retención de backups y revisión profesional del contenido. La aplicación móvil completa, IA, protocolos clínicos y red profesional son desarrollo posterior.
+
+## Comandos del equipo
+
+Sin servicio de correo no hay recuperación de contraseña desde la web, así que se gestiona por línea de comandos contra la base de producción:
+
+```powershell
+$env:DATABASE_URL="<cadena DATABASE_URL_UNPOOLED de Neon>"
+
+npm run team:list                       # cuentas existentes
+npm run team:bootstrap -- correo "Nombre"   # primera cuenta (solo si no hay ninguna)
+npm run team:password -- correo         # restablecer una contraseña perdida
+
+Remove-Item Env:DATABASE_URL
+```
+
+`team:password` genera una contraseña nueva, cierra las sesiones abiertas de esa cuenta y obliga a cambiarla al entrar.

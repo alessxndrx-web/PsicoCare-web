@@ -59,6 +59,15 @@ export async function setUserDisabled(id: string, disabled: boolean) {
   await query("UPDATE team_users SET disabled = $2 WHERE id = $1", [id, disabled]);
   if (disabled) await query("DELETE FROM team_sessions WHERE user_id = $1", [id]);
 }
+/** Operator-issued reset: forces a rotation and drops every live session of that account. */
+export async function resetPasswordByEmail(email: string, password: string) {
+  const user = await one("SELECT id FROM team_users WHERE lower(email) = $1", [normalizeEmail(email)]);
+  if (!user) throw new Error("No existe ninguna cuenta con ese correo.");
+  await query("UPDATE team_users SET password_hash = $2, must_change_password = true, disabled = false WHERE id = $1",
+    [user.id, await hashPassword(password)]);
+  await query("DELETE FROM team_sessions WHERE user_id = $1", [user.id]);
+  return String(user.id);
+}
 export async function changePassword(id: string, password: string) {
   await query("UPDATE team_users SET password_hash = $2, must_change_password = false WHERE id = $1", [id, await hashPassword(password)]);
 }
