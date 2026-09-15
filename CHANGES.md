@@ -3,7 +3,8 @@
 ## 2026-09-14 — Correcciones de texto y de saltos de línea en móvil
 
 - Se corrige la causa de las palabras pegadas en móvil: tres reglas ocultaban los `<br>` en pantallas pequeñas sin dejar separación, de modo que «sustituye» y «la atención» se unían. Ahora todos los saltos llevan un espacio delante, así que ocultarlos es seguro.
-- Se cambia el eslogan de la demo, que se prestaba a doble lectura, por «Conócela por dentro, antes que nadie».
+- Se cambia el eslogan de la demo, que se prestaba a doble lectura, por «Así funciona PsicoCare, paso a paso».
+- La suite e2e compila en `.next-e2e`, de modo que ya no invalida el build del servidor de desarrollo al ejecutarse.
 - Se corrige un texto que había quedado falso en la sección de seguridad: la encuesta sí ofrece un correo opcional al final.
 - Se unifica el tratamiento en la página de educación, que mezclaba «tú» y «ustedes».
 - Se escriben «multicampus» y «multisede» sin guion, según la norma para prefijos.

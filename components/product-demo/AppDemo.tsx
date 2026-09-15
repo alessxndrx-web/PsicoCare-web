@@ -34,7 +34,7 @@ export function AppDemo() {
   }, [screen, started]);
   const selected = modules.find(m => m.id === screen);
   return <section className="demo-section section-space" id="app-movil"><Container>
-    <div className="demo-layout"><div className="demo-copy"><SectionHeading eyebrow="La app, en tus manos" title={<>Conócela por dentro, <br/>antes que nadie.</>}>Descubre cómo un pequeño momento para ti puede convertirse en un primer paso.</SectionHeading>
+    <div className="demo-layout"><div className="demo-copy"><SectionHeading eyebrow="La app, en tus manos" title={<>Así funciona PsicoCare, <br/>paso a paso.</>}>Descubre cómo un pequeño momento para ti puede convertirse en un primer paso.</SectionHeading>
       <p className="demo-instruction">Esta es una demo interactiva. Elige un módulo o comienza el recorrido desde la bienvenida.</p>
       <div className="demo-selectors" aria-label="Explorar pantallas de la demo">
         <button className={screen === "welcome" ? "selected" : ""} onClick={() => go("welcome")}><span>01</span>Tu primer paso<Icon name="arrow" size={18}/></button>

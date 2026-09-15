@@ -13,6 +13,7 @@ export default defineConfig({
       SITE_URL: "http://127.0.0.1:3100",
       PC_TEST_ADMIN_EMAIL: process.env.PC_TEST_ADMIN_EMAIL!,
       PC_TEST_ADMIN_PASSWORD: process.env.PC_TEST_ADMIN_PASSWORD!,
+      NEXT_DIST_DIR: ".next-e2e",
     },
   },
 });
