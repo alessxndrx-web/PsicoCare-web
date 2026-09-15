@@ -42,10 +42,10 @@ export function EmailOptIn({ slug, googleEnabled, participant, notice, onChange 
   return <div className="email-optin">
     {notice && NOTICES[notice] && <p className="email-notice" role="status">{NOTICES[notice]}</p>}
     {!open ? <button className="email-optin-trigger" onClick={() => setOpen(true)}>
-      <Icon name="mail" size={20}/><span><strong>¿Quieres enterarte cuando PsicoCare esté disponible?</strong>Deja tu correo. Es opcional y puedes quitarlo después.</span><Icon name="arrow" size={17}/>
+      <Icon name="mail" size={20}/><span><strong>¿Quieres enterarte cuando Psico Care esté disponible?</strong>Deja tu correo. Es opcional y puedes quitarlo después.</span><Icon name="arrow" size={17}/>
     </button> : <>
       <h3>Déjanos tu correo (opcional)</h3>
-      <p>Lo usaremos solo para avisarte sobre el avance de PsicoCare. Se guarda por separado de tus respuestas y no lo compartimos con nadie. <Link href="/privacidad" className="text-action">Cómo tratamos tus datos.</Link></p>
+      <p>Lo usaremos solo para avisarte sobre el avance de Psico Care. Se guarda por separado de tus respuestas y no lo compartimos con nadie. <Link href="/privacidad" className="text-action">Cómo tratamos tus datos.</Link></p>
       {googleEnabled && <><a className="button button-google" href="/api/auth/google"><GoogleMark/>Continuar con Google</a>
         <p className="survey-status-note">Solo leemos la dirección de correo de tu cuenta. No accedemos a tu Gmail, tus contactos ni ningún otro dato.</p>
         <div className="email-divider"><span>o escríbelo a mano</span></div></>}
@@ -61,7 +61,7 @@ export function EmailOptIn({ slug, googleEnabled, participant, notice, onChange 
         finally { setBusy(false); }
       }}>
         <label>Correo electrónico<input type="email" value={email} required maxLength={200} autoComplete="email" onChange={e => { setEmail(e.target.value); setError(""); }} placeholder="tucorreo@ejemplo.com"/></label>
-        <label className="checkbox-label"><input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)}/><span>Autorizo a PsicoCare a guardar mi correo para avisarme sobre el proyecto. Puedo pedir que lo borren cuando quiera.</span></label>
+        <label className="checkbox-label"><input type="checkbox" checked={consent} onChange={e => setConsent(e.target.checked)}/><span>Autorizo a Psico Care a guardar mi correo para avisarme sobre el proyecto. Puedo pedir que lo borren cuando quiera.</span></label>
         {error && <p className="form-error" role="alert">{error}</p>}
         <div className="survey-navigation"><button type="button" disabled={busy} onClick={() => { setOpen(false); setError(""); }}>Ahora no</button><button className="button button-primary" disabled={busy}>{busy ? "Guardando…" : "Guardar mi correo"}<Icon name="arrow" size={17}/></button></div>
       </form>

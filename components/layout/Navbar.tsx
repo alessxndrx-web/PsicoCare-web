@@ -19,7 +19,7 @@ export function Navbar() {
     return () => { document.removeEventListener("keydown", onKey); window.removeEventListener("resize", onResize); };
   }, [open]);
   return <header className="site-header"><nav className="container nav-inner" aria-label="Navegación principal">
-    <Link href="/" aria-label="PsicoCare — inicio" onClick={() => setOpen(false)}><Logo /></Link>
+    <Link href="/" aria-label="Psico Care — inicio" onClick={() => setOpen(false)}><Logo /></Link>
     <div className="desktop-nav">{nav.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
     <Link className="button button-small button-primary nav-cta" href="/#app-movil">Probar la experiencia <Icon name="arrow" size={16}/></Link>
     <button className="menu-trigger icon-button" ref={trigger} aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}><Icon name={open ? "close" : "menu"}/></button>

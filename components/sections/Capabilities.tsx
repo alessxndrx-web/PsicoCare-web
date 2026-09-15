@@ -9,7 +9,7 @@ export function Capabilities() {
   const active = modules[index];
   return <section className="modules-section section-space" id="funciones"><Container>
     <div className="split-heading"><SectionHeading eyebrow="Un ecosistema para acompañarte" title="Lo que necesitas, a tu ritmo."/><p>Ocho módulos conectados por una idea: ayudarte a encontrar un pequeño paso que tenga sentido para ti.</p></div>
-    <div className="modules-layout"><div className="module-tabs" role="tablist" aria-label="Módulos de PsicoCare" aria-orientation="vertical" onKeyDown={event => {
+    <div className="modules-layout"><div className="module-tabs" role="tablist" aria-label="Módulos de Psico Care" aria-orientation="vertical" onKeyDown={event => {
       const next = event.key === "ArrowDown" ? (index + 1) % modules.length : event.key === "ArrowUp" ? (index + modules.length - 1) % modules.length : event.key === "Home" ? 0 : event.key === "End" ? modules.length - 1 : null;
       if (next !== null) { event.preventDefault(); setIndex(next); refs.current[next]?.focus(); }
     }}>{modules.map((m, i) => <button key={m.id} ref={el => { refs.current[i] = el; }} role="tab" id={"tab-" + m.id} aria-controls={"panel-" + m.id} aria-selected={i === index} tabIndex={i === index ? 0 : -1} onClick={() => setIndex(i)}><Icon name={m.icon} size={20}/><span>{m.name}</span><Icon name="arrow" size={16}/></button>)}</div>

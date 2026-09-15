@@ -98,11 +98,11 @@ test("survey validates consent, saves and resumes a draft, submits once and supp
   }
   await expect(page.getByRole("heading", { name: "Revisa lo que nos quieres compartir." })).toBeVisible();
   await page.getByRole("button", { name: "Enviar mis respuestas" }).click();
-  await expect(page.getByRole("heading", { name: "Gracias por ayudarnos a construir PsicoCare." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Gracias por ayudarnos a construir Psico Care." })).toBeVisible();
   const stored = await (await page.request.get(endpoint)).json();
   expect(stored.response.completed).toBe(true);
   await page.reload();
-  await expect(page.getByRole("heading", { name: "Gracias por ayudarnos a construir PsicoCare." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Gracias por ayudarnos a construir Psico Care." })).toBeVisible();
   await page.getByRole("button", { name: "Retirar mi participación y borrar respuestas" }).click();
   await page.getByRole("button", { name: "Eliminar mi participación" }).click();
   await expect(page.getByRole("heading", { name: "Tu participación fue retirada." })).toBeVisible();
@@ -189,7 +189,7 @@ test("education page separates the free product from the institutional layer", a
   const errors: string[] = [];
   page.on("pageerror", error => errors.push(error.message));
   await page.goto("/educacion");
-  await expect(page.getByRole("heading", { name: "PsicoCare para tu comunidad educativa." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Psico Care para tu comunidad educativa." })).toBeVisible();
   // The free-for-people promise must be stated, not implied.
   await expect(page.locator(".edu-promise")).toContainText("gratuito para las personas");
   await expect(page.locator(".compare-card.is-free")).toContainText("Siempre gratuito para usuarios individuales.");
@@ -206,12 +206,12 @@ test("education page separates the free product from the institutional layer", a
   }
   await expect(page.locator(".metric-placeholder").first()).toContainText("Sin datos todavía");
   // Commercial cards and collaboration tracks are presented as different categories.
-  for (const plan of ["Piloto de validación", "PsicoCare Educación", "Programa a medida"]) {
+  for (const plan of ["Piloto de validación", "Psico Care Educación", "Programa a medida"]) {
     await expect(page.locator(".plan-card").filter({ has: page.getByRole("heading", { name: plan, exact: true }) })).toHaveCount(1);
   }
   await expect(page.locator(".collab-card")).toHaveCount(2);
-  const education = page.locator(".plan-card").filter({ has: page.getByRole("heading", { name: "PsicoCare Educación", exact: true }) });
-  await expect(education.getByRole("link", { name: /Conocer PsicoCare Educación/ })).toHaveAttribute("href", "/#contacto");
+  const education = page.locator(".plan-card").filter({ has: page.getByRole("heading", { name: "Psico Care Educación", exact: true }) });
+  await expect(education.getByRole("link", { name: /Conocer Psico Care Educación/ })).toHaveAttribute("href", "/#contacto");
   const pilot = page.locator(".plan-card").filter({ has: page.getByRole("heading", { name: "Piloto de validación", exact: true }) });
   await expect(pilot.getByRole("link", { name: /Solicitar piloto/ })).toBeVisible();
   for (const [width, height] of [[375, 812], [390, 844], [430, 932], [768, 1024], [1366, 768], [1440, 900], [1536, 864], [1920, 1080]]) {
@@ -223,7 +223,7 @@ test("education page separates the free product from the institutional layer", a
   expect(accessibility.violations).toEqual([]);
   expect(errors).toEqual([]);
   await page.goto("/");
-  await expect(page.locator(".audience-institutions").getByRole("link", { name: /Conocer PsicoCare Educación/ })).toHaveAttribute("href", "/educacion");
+  await expect(page.locator(".audience-institutions").getByRole("link", { name: /Conocer Psico Care Educación/ })).toHaveAttribute("href", "/educacion");
   await expect(page.getByRole("navigation").getByRole("link", { name: "Educación", exact: true }).first()).toBeVisible();
 });
 test("email opt-in is optional, reversible and visible to the internal panel", async ({ page }) => {
@@ -232,10 +232,10 @@ test("email opt-in is optional, reversible and visible to the internal panel", a
   expect((await page.request.post(endpoint, { data: { consent: true, adult: true, consentVersion: CONSENT_VERSION }, headers: { origin } })).ok()).toBe(true);
   expect((await page.request.put(endpoint, { data: { version: 1, complete: true, answers }, headers: { origin } })).ok()).toBe(true);
   await page.goto("/encuestas");
-  await expect(page.getByRole("heading", { name: "Gracias por ayudarnos a construir PsicoCare." })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Gracias por ayudarnos a construir Psico Care." })).toBeVisible();
   // Completing the survey must not have stored any address on its own.
   expect((await (await page.request.get(endpoint)).json()).participant).toBeNull();
-  await page.getByRole("button", { name: /¿Quieres enterarte cuando PsicoCare/ }).click();
+  await page.getByRole("button", { name: /¿Quieres enterarte cuando Psico Care/ }).click();
   await page.getByLabel("Correo electrónico", { exact: true }).fill("participante@ejemplo.com");
   await page.getByRole("button", { name: "Guardar mi correo" }).click();
   await expect(page.locator(".email-optin").getByRole("alert")).toContainText("Confirma que quieres dejarnos tu correo");

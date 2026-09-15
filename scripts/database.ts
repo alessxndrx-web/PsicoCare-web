@@ -26,7 +26,7 @@ async function main() {
   if (action === "bootstrap") {
     await migrate();
     const email = process.argv[3] ?? process.env.BOOTSTRAP_EMAIL;
-    const name = process.argv[4] ?? process.env.BOOTSTRAP_NAME ?? "Equipo PsicoCare";
+    const name = process.argv[4] ?? process.env.BOOTSTRAP_NAME ?? "Equipo Psico Care";
     if (!email) fail("Uso: npm run team:bootstrap -- correo@ejemplo.com \"Nombre Apellido\"");
     if (await countUsers()) fail("Ya existe al menos una cuenta activa. Crea las demás desde el panel.");
     const password = process.env.BOOTSTRAP_PASSWORD ?? randomBytes(9).toString("base64url");

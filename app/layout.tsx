@@ -9,10 +9,10 @@ import "./globals.css";
 const base = process.env.SITE_URL ? new URL(process.env.SITE_URL) : undefined;
 export const metadata: Metadata = {
   metadataBase: base,
-  title: { default: "PsicoCare — Acompañamiento emocional para jóvenes", template: "%s | PsicoCare" },
+  title: { default: "Psico Care — Acompañamiento emocional para jóvenes", template: "%s | Psico Care" },
   description: site.description,
-  openGraph: { title: "PsicoCare — Tu bienestar importa.", description: site.description, type: "website", locale: "es_NI", siteName: site.name },
-  twitter: { card: "summary_large_image", title: "PsicoCare — Tu bienestar importa.", description: site.description },
+  openGraph: { title: "Psico Care — Tu bienestar importa.", description: site.description, type: "website", locale: "es_NI", siteName: site.name },
+  twitter: { card: "summary_large_image", title: "Psico Care — Tu bienestar importa.", description: site.description },
   robots: { index: true, follow: true },
 };
 export const viewport: Viewport = { themeColor: "#000022", colorScheme: "light dark" };

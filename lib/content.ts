@@ -1,6 +1,6 @@
 export const site = {
-  name: "PsicoCare", tagline: "Tu bienestar importa.",
-  description: "Explora PsicoCare: una aplicación en desarrollo para acompañarte con conversaciones guiadas, reflexiones, ejercicios y práctica a tu ritmo.",
+  name: "Psico Care", tagline: "Tu bienestar importa.",
+  description: "Explora Psico Care: una aplicación en desarrollo para acompañarte con conversaciones guiadas, reflexiones, ejercicios y práctica a tu ritmo.",
   email: "contacto.Psicocare26@gmail.com", phone: "+505 8970-0990", phoneHref: "+50589700990",
 };
 export const nav = [
@@ -21,10 +21,10 @@ export const modules = [
 export type ModuleId = (typeof modules)[number]["id"];
 
 /** The core promise: the product is free for people; institutions buy the layer around it. */
-export const FREE_PROMISE = "PsicoCare es gratuito para las personas. Las instituciones incorporan herramientas para acompañar mejor a sus comunidades.";
+export const FREE_PROMISE = "Psico Care es gratuito para las personas. Las instituciones incorporan herramientas para acompañar mejor a sus comunidades.";
 export const PRIVACY_PROMISE = "La institución mide el programa. La experiencia personal sigue siendo privada.";
 export const PRICING_NOTE = "Todavía no publicamos precios cerrados. Definimos cada programa según el tamaño de la comunidad, la duración y el alcance, y lo dejamos por escrito antes de comprometer nada.";
-export const DEVELOPMENT_NOTE = "PsicoCare está en desarrollo y buscamos instituciones pioneras para la fase de validación. Las funciones institucionales descritas aquí forman parte del diseño del programa y se acuerdan por escrito antes de cualquier implementación.";
+export const DEVELOPMENT_NOTE = "Psico Care está en desarrollo y buscamos instituciones pioneras para la fase de validación. Las funciones institucionales descritas aquí forman parte del diseño del programa y se acuerdan por escrito antes de cualquier implementación.";
 
 /** Everything a young person gets without paying and without belonging to an institution. */
 export const personalExperience = [
@@ -66,15 +66,15 @@ export const programExample = {
 export const institutionalPlans = [
   {
     id: "pilot", name: "Piloto de validación", price: "Sin costo", unit: "durante la fase de validación",
-    summary: "Evaluar PsicoCare con una comunidad educativa definida antes de una implementación mayor.",
+    summary: "Evaluar Psico Care con una comunidad educativa definida antes de una implementación mayor.",
     highlight: false, cta: "Solicitar piloto",
     note: "Programa limitado de validación, no un servicio institucional gratuito permanente.",
     includes: ["Hasta 100 participantes", "Duración acordada de 2 a 3 meses", "Encuesta inicial y final", "Métricas agregadas", "Informe de cierre", "Acompañamiento de implementación"],
   },
   {
-    id: "education", name: "PsicoCare Educación", price: "Planes según el tamaño", unit: "de la comunidad educativa",
-    summary: "Para universidades y centros educativos que quieren incorporar PsicoCare como parte de sus iniciativas de bienestar.",
-    highlight: true, cta: "Conocer PsicoCare Educación",
+    id: "education", name: "Psico Care Educación", price: "Planes según el tamaño", unit: "de la comunidad educativa",
+    summary: "Para universidades y centros educativos que quieren incorporar Psico Care como parte de sus iniciativas de bienestar.",
+    highlight: true, cta: "Conocer Psico Care Educación",
     note: "El alcance y las condiciones se definen por escrito antes de cualquier compromiso.",
     includes: ["Acceso para la comunidad definida", "Panel institucional", "Programas y cohortes", "Encuestas institucionales", "Métricas agregadas", "Informes periódicos", "Recursos propios de bienestar", "Soporte de implementación"],
   },

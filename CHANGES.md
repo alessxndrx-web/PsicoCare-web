@@ -1,5 +1,14 @@
 # Cambios
 
+## 2026-09-14 — La marca pasa a «Psico Care»
+
+- Se escribe la marca como «Psico Care», en dos palabras, en los 100 textos visibles del sitio. No se tocan el correo de contacto, el identificador de la encuesta ni los nombres de infraestructura, que van en minúscula y romperían enlaces o datos ya guardados.
+- En los titulares la marca lleva espacio duro, de modo que «Psico» y «Care» nunca quedan en líneas distintas.
+- El eslogan de la demo pasa a «Así funciona Psico Care, de principio a fin», para no repetir «paso a paso», que es también el nombre de un módulo mostrado justo debajo.
+- Se resiembra la encuesta para que su título guardado use la marca nueva.
+- El build local de verificación puede usar `NEXT_DIST_DIR`, así que compilar ya no invalida el servidor de desarrollo en marcha.
+
+
 ## 2026-09-14 — Correcciones de texto y de saltos de línea en móvil
 
 - Se corrige la causa de las palabras pegadas en móvil: tres reglas ocultaban los `<br>` en pantallas pequeñas sin dejar separación, de modo que «sustituye» y «la atención» se unían. Ahora todos los saltos llevan un espacio delante, así que ocultarlos es seguro.

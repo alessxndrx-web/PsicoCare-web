@@ -1,4 +1,4 @@
-# Recursos oficiales de PsicoCare
+# Recursos oficiales de Psico Care
 
 Fuente: **Manual de Marca de Psico Care - Hackathon.pdf**, incluido en el ZIP facilitado por el usuario. El PDF tiene 52 páginas y no se añade al repositorio por su tamaño.
 

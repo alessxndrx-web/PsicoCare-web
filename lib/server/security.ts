@@ -48,6 +48,6 @@ export function json(data: unknown, status = 200) { return NextResponse.json(dat
 export function apiError(error: unknown) {
   if (error instanceof HttpError) { const response = json({ error: error.message }, error.status); if (error.status === 429) response.headers.set("Retry-After", "60"); return response; }
   if (error instanceof DatabaseNotConfigured) return json({ error: "El servicio está pendiente de configuración." }, 503);
-  console.error("PsicoCare request failed", error instanceof Error ? error.name : "unknown");
+  console.error("Psico Care request failed", error instanceof Error ? error.name : "unknown");
   return json({ error: "No pudimos guardar la información. Inténtalo de nuevo en unos momentos." }, 503);
 }
