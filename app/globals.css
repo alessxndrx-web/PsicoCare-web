@@ -635,3 +635,6 @@ input[type=checkbox], input[type=radio] { accent-color: #7541c4; width: 18px; he
   :root { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+.download-details { margin-top: 12px; color: var(--muted, #b5b4cc); font-size: 13px; line-height: 1.6; }
+.hero .download-details { color: var(--periwinkle); }

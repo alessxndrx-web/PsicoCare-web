@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { androidDownload } from "@/lib/downloads";
 import { Container, SectionHeading } from "@/components/ui/Primitives";
 import { Icon } from "@/components/ui/Icon";
 import { Logo } from "@/components/ui/Logo";
@@ -35,6 +36,8 @@ export function AppDemo() {
   const selected = modules.find(m => m.id === screen);
   return <section className="demo-section section-space" id="app-movil"><Container>
     <div className="demo-layout"><div className="demo-copy"><SectionHeading eyebrow="La app, en tus manos" title="Así funciona Psico Care, de principio a fin.">Descubre cómo un pequeño momento para ti puede convertirse en un primer paso.</SectionHeading>
+      <a className="button button-primary" href={androidDownload.url}>Descarga Psico Care <Icon name="arrow" size={18}/></a>
+      <p className="download-details">APK {androidDownload.version} · {androidDownload.requirements}</p>
       <p className="demo-instruction">Esta es una demo interactiva. Elige un módulo o comienza el recorrido desde la bienvenida.</p>
       <div className="demo-selectors" aria-label="Explorar pantallas de la demo">
         <button className={screen === "welcome" ? "selected" : ""} onClick={() => go("welcome")}><span>01</span>Tu primer paso<Icon name="arrow" size={18}/></button>

@@ -1,7 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { ButtonLink, Container, Eyebrow } from "@/components/ui/Primitives";
+import { androidDownload } from "@/lib/downloads";
+import { Container, Eyebrow } from "@/components/ui/Primitives";
 import { Icon } from "@/components/ui/Icon";
 import { PhoneFrame } from "@/components/product-demo/PhoneFrame";
 import { HomeScreen } from "@/components/product-demo/HomeScreen";
@@ -12,7 +13,8 @@ export function Hero() {
       <h1>Tu bienestar <br/><span>importa.</span></h1>
       <p className="hero-lead">Un espacio para hablar, practicar<br className="desktop-break"/> y entender mejor lo que sientes.</p>
       <p className="hero-description">Conoce la aplicación que estamos construyendo para acompañarte con conversaciones guiadas, reflexiones y herramientas. Un pequeño paso a la vez.</p>
-      <div className="button-row"><ButtonLink href="#app-movil">Explorar Psico Care</ButtonLink><Link className="watch-link" href="#producto"><span><Icon name="play" size={14}/></span>Ver cómo funciona</Link></div>
+      <div className="button-row"><a className="button button-primary" href={androidDownload.url}>Descarga Psico Care <Icon name="arrow" size={18}/></a><Link className="watch-link" href="#producto"><span><Icon name="play" size={14}/></span>Ver cómo funciona</Link></div>
+      <p className="download-details">APK {androidDownload.version} · {androidDownload.requirements}</p>
       <div className="hero-note"><Icon name="shield" size={18}/><p>Psico Care no diagnostica ni sustituye <br/>la atención de un profesional.</p></div>
     </div>
     <div className="hero-product"><div className="product-orbit" aria-hidden="true"/><div className="hero-product-label"><span className="status-dot"/> ASÍ SE SIENTE PSICOCARE</div>

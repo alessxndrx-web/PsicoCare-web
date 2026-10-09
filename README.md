@@ -33,7 +33,7 @@ Nunca uses el prefijo `NEXT_PUBLIC_` para estas variables ni subas secretos al r
 - `/seguridad`, `/privacidad`, `/nosotros`, `/tecnologia`: información secundaria.
 - `/admin/encuestas`: acceso interno, agregados reales y buzón de contactos. Protegido en servidor.
 
-No hay registro de usuarios, servicios de IA, descarga de una app publicada, agenda clínica ni integración de correo. El formulario de contacto guarda un mensaje real en el buzón del equipo; no envía un email. El equipo debe revisar ese buzón.
+La web ofrece la descarga del APK Android firmado desde Azure. El enlace público y la versión se mantienen en `lib/downloads.ts`; para una nueva versión, publicar primero el APK y después actualizar ese archivo. La demo web conserva sus ejemplos preparados. No hay registro de usuarios, servicios de IA de la demo, agenda clínica ni integración de correo. El formulario de contacto guarda un mensaje real en el buzón del equipo; no envía un email. El equipo debe revisar ese buzón.
 
 ## Persistencia y migraciones
 

@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { androidDownload } from "@/lib/downloads";
 import { Logo } from "@/components/ui/Logo";
 import { Icon } from "@/components/ui/Icon";
 import { nav } from "@/lib/content";
@@ -21,7 +22,7 @@ export function Navbar() {
   return <header className="site-header"><nav className="container nav-inner" aria-label="Navegación principal">
     <Link href="/" aria-label="Psico Care — inicio" onClick={() => setOpen(false)}><Logo /></Link>
     <div className="desktop-nav">{nav.map(item => <Link key={item.href} href={item.href}>{item.label}</Link>)}</div>
-    <Link className="button button-small button-primary nav-cta" href="/#app-movil">Probar la experiencia <Icon name="arrow" size={16}/></Link>
+    <a className="button button-small button-primary nav-cta" href={androidDownload.url}>Descarga Psico Care <Icon name="arrow" size={16}/></a>
     <button className="menu-trigger icon-button" ref={trigger} aria-label={open ? "Cerrar menú" : "Abrir menú"} aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen(!open)}><Icon name={open ? "close" : "menu"}/></button>
     {open && <div id="mobile-menu" className="mobile-menu" ref={menu}>{[...nav, { label: "Nosotros", href: "/nosotros" }, { label: "Contacto", href: "/#contacto" }].map(item => <Link onClick={() => setOpen(false)} key={item.href} href={item.href}>{item.label}<Icon name="arrow" size={18}/></Link>)}</div>}
   </nav></header>;
