@@ -17,6 +17,9 @@ el acceso y la configuración del proyecto. Referencias primarias:
 [Next.js](https://github.com/vercel/next.js/security/advisories/GHSA-2464-fhr4-w9xw),
 [sharp](https://github.com/lovell/sharp/security/advisories/GHSA-wq5f-xc86-pv6w).
 Una versión afectada no demuestra que haya ocurrido una intrusión.
+La auditoría final no reporta vulnerabilidades en dependencias de producción.
+Permanecen seis avisos moderados en herramientas de desarrollo; se conserva una
+cadena de lint compatible en lugar de forzar versiones mayores o desactivar reglas.
 
 La verificación comprende compilación, tipos, lint, pruebas de privacidad y analítica,
 portada y enlaces, descarga completa por HTTPS y coincidencia de tamaño y SHA-256.
