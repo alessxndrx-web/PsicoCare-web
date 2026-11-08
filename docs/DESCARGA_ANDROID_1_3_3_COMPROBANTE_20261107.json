@@ -1,0 +1,73 @@
+{
+  "checked_at_utc": "2026-11-08T02:43:22.436453+00:00",
+  "deployment_id": "dpl_13Zb7jocZ11Sn5A6axJsUUYBJQvu",
+  "production_commit": "ef826f526d13e2d229fa9734953440e5c231b454",
+  "base_url": "https://psico-care-web.vercel.app",
+  "anonymous": true,
+  "checks": [
+    {
+      "name": "home_and_download_buttons",
+      "passed": true,
+      "status": 200,
+      "download_links": 4,
+      "candidate_visible": true
+    },
+    {
+      "name": "security_headers",
+      "passed": true,
+      "headers": {
+        "x-frame-options": "DENY",
+        "x-content-type-options": "nosniff",
+        "referrer-policy": "strict-origin-when-cross-origin",
+        "content-security-policy": "frame-ancestors 'none'; base-uri 'self'; object-src 'none'; form-action 'self'"
+      }
+    },
+    {
+      "name": "full_signed_apk_download",
+      "passed": true,
+      "status": 200,
+      "url": "https://psico-care-web.vercel.app/downloads/PsicoCare-1.3.3.apk",
+      "bytes": 55192001,
+      "sha256": "f3a8b440c510e4788fcf47dc4624816bf4d9c4706491ff896e6f0419570eb33a",
+      "content_type": "application/vnd.android.package-archive"
+    },
+    {
+      "name": "checksum_sidecar",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "/privacidad",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "/cookies",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "/encuestas",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "/educacion",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "/admin/encuestas",
+      "passed": true,
+      "status": 200
+    },
+    {
+      "name": "anonymous_survey_definition",
+      "passed": true,
+      "status": 200,
+      "question_count": 14,
+      "no_personal_data": true
+    }
+  ],
+  "passed": true
+}
