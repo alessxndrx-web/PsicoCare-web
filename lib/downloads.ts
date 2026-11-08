@@ -1,6 +1,7 @@
-/** Public signed Android release. Update this URL when publishing the next APK. */
+/** Signed Android release served by this site. Keep the versioned file immutable. */
 export const androidDownload = {
-  url: "https://psicocare-api-demo-e9b5d7.northcentralus.cloudapp.azure.com/downloads/PsicoCare-1.3.0-Azure.apk",
-  version: "1.3.0",
+  url: "/downloads/PsicoCare-1.3.3.apk",
+  version: "1.3.3",
+  status: "Versión candidata",
   requirements: "Android 8.0 o superior",
 } as const;
