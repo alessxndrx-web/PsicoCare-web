@@ -14,7 +14,7 @@ export function Hero() {
       <p className="hero-lead">Un espacio para hablar, practicar<br className="desktop-break"/> y entender mejor lo que sientes.</p>
       <p className="hero-description">Conoce la aplicación que estamos construyendo para acompañarte con conversaciones guiadas, reflexiones y herramientas. Un pequeño paso a la vez.</p>
       <div className="button-row"><a className="button button-primary" href={androidDownload.url}>Descarga Psico Care <Icon name="arrow" size={18}/></a><Link className="watch-link" href="#producto"><span><Icon name="play" size={14}/></span>Ver cómo funciona</Link></div>
-      <p className="download-details">APK {androidDownload.version} · {androidDownload.requirements}</p>
+      <p className="download-details">APK {androidDownload.version} · {androidDownload.requirements} · {androidDownload.status}</p>
       <div className="hero-note"><Icon name="shield" size={18}/><p>Psico Care no diagnostica ni sustituye <br/>la atención de un profesional.</p></div>
     </div>
     <div className="hero-product"><div className="product-orbit" aria-hidden="true"/><div className="hero-product-label"><span className="status-dot"/> ASÍ SE SIENTE PSICOCARE</div>
