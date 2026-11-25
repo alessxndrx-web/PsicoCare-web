@@ -3,7 +3,7 @@ import Link from "next/link";
 import { DocumentPage } from "@/components/layout/DocumentPage";
 import { PageSchema } from "@/components/seo/PageSchema";
 import { ButtonLink } from "@/components/ui/Primitives";
-import { androidDownload } from "@/lib/downloads";
+import { androidDownload, androidDownloadOptionsUrl } from "@/lib/downloads";
 import { faqSchema, pageMetadata, routeUpdated } from "@/lib/seo";
 
 const path = "/neuroia";
@@ -15,7 +15,7 @@ export const metadata: Metadata = pageMetadata({ title, description, path });
 const faq = [
   { question: "¿Qué es NeuroIA?", answer: "NeuroIA es el asistente conversacional con inteligencia artificial de la aplicación Psico Care, creada en Nicaragua. Acompaña a poner en palabras lo que sientes, a reflexionar y a practicar situaciones cotidianas. No diagnostica ni sustituye la atención profesional." },
   { question: "¿NeuroIA es un psicólogo o una terapia?", answer: "No. NeuroIA es una herramienta de acompañamiento emocional. No realiza diagnósticos, no prescribe medicamentos y no reemplaza a un profesional de salud mental ni a los servicios de emergencia." },
-  { question: "¿Cómo puedo usar NeuroIA?", answer: `NeuroIA está dentro de la app Android de Psico Care. La versión ${androidDownload.version} se descarga gratis desde esta web como versión candidata y requiere ${androidDownload.requirements}. Por ahora no hay versión para iPhone.` },
+  { question: "¿Cómo puedo usar NeuroIA?", answer: `NeuroIA está dentro de la app Android de Psico Care. La versión ${androidDownload.version} se descarga gratis desde esta web para instalarla por separado y requiere ${androidDownload.requirements}. Por ahora no hay versión para iPhone.` },
   { question: "¿NeuroIA guarda mis conversaciones?", answer: "Sí, si inicias sesión: las conversaciones se guardan en tu teléfono y en tu cuenta para que puedas retomarlas. Solo tu propia sesión puede verlas, y puedes borrarlas desde la app. Las imágenes de la cámara nunca se guardan." },
   { question: "¿Qué hace NeuroIA si alguien escribe que está en peligro?", answer: "Antes de generar cualquier texto, NeuroIA revisa señales de riesgo y, si las detecta, muestra una respuesta de seguridad predefinida que no depende del modelo de lenguaje. Aun así, NeuroIA no es un servicio de emergencia: ante un peligro inmediato hay que contactar a los servicios de emergencia locales o a una persona de confianza." },
   { question: "¿NeuroIA tiene relación con otros productos llamados NeuroIA?", answer: "No. NeuroIA es el nombre del asistente de Psico Care y no está relacionado con otros productos o empresas que usan nombres parecidos." },
@@ -84,7 +84,7 @@ export default function Page() {
       <h2>Preguntas frecuentes sobre NeuroIA</h2>
       <div className="faq-list">{faq.map(item => <div key={item.question}><h3>{item.question}</h3><p>{item.answer}</p></div>)}</div>
 
-      <div className="document-actions"><a className="button button-primary" href={androidDownload.url}>Descargar Psico Care para Android</a><ButtonLink href="/#app-movil" variant="ghost">Ver la demo</ButtonLink></div>
+      <div className="document-actions"><Link className="button button-primary" href={androidDownloadOptionsUrl}>Ver descargas para Android</Link><ButtonLink href="/#app-movil" variant="ghost">Ver la demo</ButtonLink></div>
     </DocumentPage>
   </>;
 }
