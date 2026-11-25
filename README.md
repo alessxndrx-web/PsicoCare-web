@@ -21,6 +21,7 @@ Abre http://localhost:3000. No hace falta una credencial para la demo ni para la
 | DATABASE_PATH | Ruta al archivo SQLite. En desarrollo: `data/psicocare.sqlite`. Obligatoria en producción; usar volumen persistente. |
 | SITE_URL | Origen de la web para proteger peticiones y resolver metadata. Usar el origen público HTTPS real antes de compilar y desplegar. |
 | ADMIN_PASSWORD | Clave privada de equipo, mínimo 16 caracteres. Sin un valor válido, el panel permanece cerrado. |
+| GOOGLE_SITE_VERIFICATION / BING_SITE_VERIFICATION | Opcionales. Valor de la metaetiqueta de verificación de Search Console y Bing Webmaster Tools. |
 | ADMIN_SESSION_SECRET | Secreto aleatorio independiente, mínimo 32 caracteres, para firmar sesiones internas de ocho horas. Rotarlo revoca las sesiones existentes. |
 
 Nunca uses el prefijo `NEXT_PUBLIC_` para estas variables ni subas secretos al repositorio. La configuración de pruebas genera sus propias credenciales efímeras y no usa credenciales de producción.
@@ -31,6 +32,9 @@ Nunca uses el prefijo `NEXT_PUBLIC_` para estas variables ni subas secretos al r
 - `/encuestas`: encuesta inicial de producto.
 - `/encuestas/construyamos-psicocare`: acceso por slug; el motor permite encuestas adicionales.
 - `/seguridad`, `/privacidad`, `/nosotros`, `/tecnologia`: información secundaria.
+- `/neuroia`, `/investigacion`, `/prensa`: el asistente NeuroIA, el método de evaluación y la ficha para medios.
+- `/blog`: solo muestra artículos de `content/blog/` con `status: publicado`; los de salud exigen `revisado_por`.
+- `/sitemap.xml`, `/robots.txt`, `/manifest.webmanifest`, `/llms.txt`: generados o servidos para buscadores. El registro de páginas públicas está en `lib/seo.ts`.
 - `/admin/encuestas`: acceso interno, agregados reales y buzón de contactos. Protegido en servidor.
 
 La web ofrece el APK Android firmado desde `public/downloads/`, sin requerir acceso a GitHub. El enlace público y la versión se mantienen en `lib/downloads.ts`. Para una nueva versión, verificar firma y SHA-256, añadir el archivo con nombre versionado y actualizar ese registro. La versión 1.3.4 se identifica como candidata; no se declara validación clínica o prueba física. La demo web conserva sus ejemplos preparados. No hay registro de usuarios, servicios de IA de la demo, agenda clínica ni integración de correo. El formulario de contacto guarda un mensaje real en el buzón del equipo; no envía un email. El equipo debe revisar ese buzón.
