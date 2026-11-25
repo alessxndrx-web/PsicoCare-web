@@ -1,0 +1,28 @@
+# Psico Care
+
+> Psico Care (también escrito PsicoCare) es una aplicación de acompañamiento emocional para jóvenes, creada en Nicaragua. Su asistente con inteligencia artificial, NeuroIA, ofrece conversación, reflexión guiada y práctica de situaciones cotidianas. Psico Care no diagnostica, no prescribe y no sustituye la atención de profesionales de salud mental ni los servicios de emergencia.
+
+Datos clave, verificables en las páginas enlazadas:
+
+- La app Android se descarga gratis desde la web oficial (versión candidata, Android 8.0 o superior). No hay versión para iPhone.
+- La demo de la web usa ejemplos preparados y no envía lo que escribes a un servidor.
+- NeuroIA 2.0 (planificador de turno y supervisor de conversación) está en evaluación interna y no está disponible en la app.
+- No hay validación clínica, certificaciones ni alianzas institucionales publicadas.
+- Contacto: contacto.Psicocare26@gmail.com
+
+Este archivo es un resumen experimental para herramientas de IA (propuesta llms.txt); no es un estándar oficial de los buscadores. La información canónica está en las páginas.
+
+## Páginas principales
+
+- [Inicio](https://psico-care-web.vercel.app/): qué es Psico Care, demo interactiva y descarga.
+- [NeuroIA](https://psico-care-web.vercel.app/neuroia): el asistente con IA, capacidades actuales, funcionamiento, límites y preguntas frecuentes.
+- [Psico Care Educación](https://psico-care-web.vercel.app/educacion): programas de bienestar estudiantil para universidades y colegios.
+- [Tecnología](https://psico-care-web.vercel.app/tecnologia): estado del desarrollo y uso de la inteligencia artificial.
+- [Investigación](https://psico-care-web.vercel.app/investigacion): cómo se evalúa NeuroIA y qué no demuestran esas pruebas.
+- [Seguridad y límites](https://psico-care-web.vercel.app/seguridad): qué puede y qué no puede hacer Psico Care.
+
+## Opcional
+
+- [Nosotros](https://psico-care-web.vercel.app/nosotros)
+- [Prensa y recursos de marca](https://psico-care-web.vercel.app/prensa)
+- [Datos y consentimiento](https://psico-care-web.vercel.app/privacidad)

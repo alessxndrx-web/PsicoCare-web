@@ -1,0 +1,117 @@
+/*
+ * Neural Awakening — homepage introduction, 1800 ms in total.
+ *   0–300     activation: a soft central impulse and the first nodes
+ *   240–860   formation: impulses trace the four strokes of the official isotype; nodes fire as they pass;
+ *             the original filled isotype settles in (identical to the official logo from ~900 ms)
+ *   780–1330  brand: the official wordmark letters rise in (complete before the flight); the tagline follows
+ *   1350–1800 transition: the logo flies into the navbar logo, the backdrop dissolves into the page
+ * Only transform, opacity and stroke-dashoffset are animated: no layout, no filters, no canvas.
+ * Everything is scoped to html[data-intro], which only the inline boot script sets.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html[data-intro="play"] .neural-intro,
+  html[data-intro="skip"] .neural-intro {
+    display: block !important;
+    position: fixed; inset: 0; z-index: 1000;
+    --ni-ease: cubic-bezier(.65, 0, .35, 1);
+    --ni-out: cubic-bezier(.16, 1, .3, 1);
+    animation: ni-exit 1800ms linear both;
+  }
+  html[data-intro="skip"] .neural-intro { animation: ni-fade-out 220ms ease-out forwards; }
+
+  /* The real navbar logo is the landing spot: hidden until the flying logo arrives on top of it. */
+  html[data-intro="play"] .site-header .brand-logo { animation: ni-hold 1800ms step-end both; }
+
+  /* Coordinated, transform-only reveal of the hero. Opacity is untouched so the LCP is unaffected. */
+  html[data-intro="play"] .hero .hero-copy { animation: ni-rise 650ms 1420ms var(--ni-out, ease-out) both; }
+  html[data-intro="play"] .hero .hero-product { animation: ni-rise 700ms 1500ms var(--ni-out, ease-out) both; }
+  html[data-intro="play"] .hero .hero-strip { animation: ni-rise 600ms 1580ms var(--ni-out, ease-out) both; }
+  /* The privacy banner waits for the page instead of appearing mid-transition. */
+  html[data-intro="play"] .cookie-banner { visibility: hidden; }
+}
+.neural-intro { display: none; }
+
+.ni-backdrop {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% 46%, #0d0a3a 0%, var(--midnight) 62%);
+  animation: ni-fade-out 450ms 1350ms ease-in-out forwards;
+}
+.ni-stage {
+  position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: clamp(14px, 2.4vh, 26px); padding: 24px; pointer-events: none;
+}
+.ni-logo {
+  width: min(64vw, 420px); aspect-ratio: 940 / 520;
+  --fx: 0px; --fy: 0px; --fs: .92; --fo: 0;
+  will-change: transform, opacity;
+  animation: ni-fly 450ms 1350ms var(--ni-ease) forwards;
+}
+.ni-svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.ni-pulse {
+  opacity: 0;
+  transform-box: fill-box; transform-origin: center;
+  animation: ni-pulse 700ms 0ms var(--ni-out) both;
+}
+.ni-trace, .ni-spark { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.ni-trace {
+  stroke: var(--periwinkle); stroke-width: 3; stroke-dasharray: 1 1; stroke-dashoffset: 1; opacity: .9;
+  animation: ni-draw var(--dur) var(--d) var(--ni-ease) both;
+}
+.ni-spark {
+  stroke: var(--celeste); stroke-width: 7; stroke-dasharray: .045 .955; stroke-dashoffset: .045; opacity: 0;
+  animation: ni-spark var(--dur) var(--d) var(--ni-ease) both;
+}
+.ni-strokes { animation: ni-fade-out 260ms 860ms ease-out forwards; }
+.ni-iso { opacity: 0; animation: ni-fade-in 320ms 600ms ease-out both; }
+.ni-node {
+  fill: var(--celeste); opacity: 0;
+  transform-box: fill-box; transform-origin: center;
+  animation: ni-node 520ms var(--d) var(--ni-out) both;
+}
+.ni-letter {
+  opacity: 0;
+  animation: ni-letter 320ms calc(780ms + var(--i) * 28ms) var(--ni-out) both;
+}
+.ni-tagline {
+  margin: 0; color: #c9c7e4; font-size: clamp(14px, 1.6vw, 19px); font-weight: 500; letter-spacing: .01em;
+  text-align: center; text-wrap: balance;
+  animation: ni-fade-out 220ms 1350ms ease-out forwards;
+}
+.ni-tagline > span { display: inline-block; animation: ni-rise-in 420ms 1000ms var(--ni-out) both; }
+.ni-skip {
+  position: absolute; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom));
+  padding: 10px 16px; min-height: 44px; border-radius: 8px; border: 1px solid #ffffff2e;
+  background: #ffffff0d; color: #e3e1f1; font-size: var(--text-caption); font-weight: 600;
+  animation: ni-fade-out 200ms 1300ms ease-out forwards;
+}
+.ni-skip:hover { background: #ffffff1a; }
+
+@keyframes ni-exit { 0%, 99.9% { visibility: visible; } 100% { visibility: hidden; pointer-events: none; } }
+@keyframes ni-hold { 0% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes ni-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ni-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes ni-pulse {
+  0% { opacity: 0; transform: scale(.1); }
+  30% { opacity: .55; }
+  100% { opacity: 0; transform: scale(2.2); }
+}
+@keyframes ni-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes ni-spark {
+  0% { stroke-dashoffset: .045; opacity: 0; }
+  10% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { stroke-dashoffset: -.955; opacity: 0; }
+}
+@keyframes ni-node {
+  0% { opacity: 0; transform: scale(.2); }
+  30% { opacity: 1; transform: scale(1.35); }
+  100% { opacity: 0; transform: scale(.6); }
+}
+@keyframes ni-letter { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+@keyframes ni-rise-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@keyframes ni-rise { from { transform: translateY(14px); } to { transform: none; } }
+@keyframes ni-fly {
+  from { transform: none; opacity: 1; }
+  to { transform: translate(var(--fx), var(--fy)) scale(var(--fs)); opacity: var(--fo); }
+}

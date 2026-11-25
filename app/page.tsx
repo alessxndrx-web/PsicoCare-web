@@ -10,7 +10,16 @@ import { Audiences } from "@/components/sections/Audiences";
 import { About } from "@/components/sections/About";
 import { Contact } from "@/components/sections/Contact";
 import { FinalCta } from "@/components/sections/FinalCta";
-export const metadata: Metadata = { alternates: { canonical: "/" } };
+import { NeuralAwakening } from "@/components/intro/NeuralAwakening";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { site } from "@/lib/content";
+import { mobileApplicationSchema, organizationSchema, pageMetadata, routeUpdated, webPageSchema, websiteSchema } from "@/lib/seo";
+const title = "Psico Care: app de bienestar emocional con IA para jóvenes";
+export const metadata: Metadata = pageMetadata({ title, description: site.description, path: "/", absoluteTitle: true });
 export default function Home() {
-  return <><Hero/><Product/><AppDemo/><Capabilities/><SurveyInvitation/><HowItWorks/><Safety/><Audiences/><About/><Contact/><FinalCta/></>;
+  return <>
+    <JsonLd nodes={[organizationSchema(), websiteSchema(), mobileApplicationSchema(), webPageSchema({ path: "/", name: title, description: site.description, updated: routeUpdated("/") })]}/>
+    <Hero/><Product/><AppDemo/><Capabilities/><SurveyInvitation/><HowItWorks/><Safety/><Audiences/><About/><Contact/><FinalCta/>
+    <NeuralAwakening/>
+  </>;
 }

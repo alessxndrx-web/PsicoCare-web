@@ -2,18 +2,20 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { ButtonLink, Container, Eyebrow, SectionHeading } from "@/components/ui/Primitives";
 import { Icon } from "@/components/ui/Icon";
+import { PageSchema } from "@/components/seo/PageSchema";
+import { pageMetadata } from "@/lib/seo";
 import {
   advancedLayer, collaborationTracks, DEVELOPMENT_NOTE, educationMoments, FREE_PROMISE,
   institutionalLayer, institutionalPlans, institutionalProcess, personalExperience,
   PRICING_NOTE, PRIVACY_PROMISE, programExample, site,
 } from "@/lib/content";
-export const metadata: Metadata = {
-  title: "Psico Care para educación",
-  description: "Psico Care es gratuito para los estudiantes. Universidades, colegios e institutos incorporan una capa institucional para desplegar programas de bienestar, organizarlos y conocer su adopción mediante información agregada.",
-  alternates: { canonical: "/educacion" },
-};
+const path = "/educacion";
+const title = "Bienestar estudiantil para universidades y colegios";
+const description = "Psico Care Educación: programas de bienestar emocional para universidades, colegios e institutos. Gratis para estudiantes; la institución conoce la adopción con datos agregados, sin acceder a la experiencia personal.";
+export const metadata: Metadata = pageMetadata({ title, description, path });
 export default function Page() {
   return <>
+    <PageSchema path={path} name={title} description={description}/>
     <section className="edu-hero"><Container>
       <div className="edu-hero-grid">
         <div><Eyebrow>Psico Care para educación</Eyebrow><h1>Psico Care para tu comunidad educativa.</h1>

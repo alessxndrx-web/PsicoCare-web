@@ -1,5 +1,13 @@
 # Cambios
 
+## 2026-11-24 — Neural Awakening, SEO y GEO
+
+- Introducción animada de 1,8 s en la primera visita a la portada de cada sesión, construida con el logotipo vectorial oficial. Solo CSS más un script en línea mínimo; sin JavaScript, con movimiento reducido, ahorro de datos, enlaces a secciones o navegación interna no se reproduce. Se puede omitir con cualquier tecla, clic o el botón «Omitir introducción».
+- Nuevas páginas: `/neuroia`, `/investigacion` y `/prensa`. `/blog` queda preparado y responde 404 hasta publicar un artículo con autor, fecha y, si es contenido de salud, revisión profesional nombrada.
+- Títulos, descripciones, canonical e imagen social propios en todas las páginas públicas; `sitemap.xml`, línea `Sitemap` en robots.txt, manifest, favicon y datos estructurados JSON-LD sin valoraciones ni afirmaciones no verificables.
+- Verificación de Search Console y Bing por variables de entorno (`GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION`).
+- Detalle, mediciones y pendientes: [docs/SEO_GEO_20261124.md](docs/SEO_GEO_20261124.md).
+
 ## 2026-09-14 — Analítica de audiencia
 
 - Se incorpora la analítica web de Vercel en las páginas públicas.
