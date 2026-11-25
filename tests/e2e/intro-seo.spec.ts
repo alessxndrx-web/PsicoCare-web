@@ -14,7 +14,7 @@ function trackErrors(page: Page) {
 test.describe("Neural Awakening", () => {
   test.use({ reducedMotion: "no-preference" });
 
-  test("plays once on the first homepage visit, ends in time and lands on the navbar logo", async ({ page }) => {
+  test("plays on a homepage load, ends in time and lands on the navbar logo", async ({ page }) => {
     const errors = trackErrors(page);
     await page.goto("/");
     expect(await introState(page)).toBe("play");
@@ -31,17 +31,18 @@ test.describe("Neural Awakening", () => {
     expect(errors).toEqual([]);
   });
 
-  test("never replays on reload or internal navigation in the same session", async ({ page }) => {
+  test("replays on reload but not internal navigation", async ({ page }) => {
     await page.goto("/");
     await page.waitForFunction(() => document.documentElement.getAttribute("data-intro") === "done", null, { timeout: 4000 });
     await page.reload();
-    expect(await introState(page)).toBeNull();
+    expect(await introState(page)).toBe("play");
+    await page.waitForFunction(() => document.documentElement.getAttribute("data-intro") === "done", null, { timeout: 4000 });
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.locator(".desktop-nav").getByRole("link", { name: "NeuroIA" }).click();
     await expect(page).toHaveURL(/\/neuroia$/);
     await page.getByRole("link", { name: "Psico Care — inicio" }).first().click();
     await expect(page).toHaveURL(origin + "/");
-    expect(await introState(page)).toBeNull();
+    expect(await introState(page)).not.toBe("play");
     await expect(page.locator(".neural-intro")).toBeHidden();
   });
 
@@ -59,11 +60,15 @@ test.describe("Neural Awakening", () => {
     }
   });
 
-  test("does not play for reduced motion or links to a section", async ({ browser }) => {
+  test("shows static branding for reduced motion and skips section links", async ({ browser }) => {
     const reduced = await browser.newContext({ reducedMotion: "reduce" });
     const page = await reduced.newPage();
     await page.goto(origin + "/");
-    expect(await introState(page)).toBeNull();
+    expect(await introState(page)).toBe("play");
+    await expect(page.locator(".neural-intro")).toBeVisible();
+    await expect(page.locator(".ni-iso")).toHaveCSS("opacity", "1");
+    await expect(page.locator(".ni-logo")).toHaveCSS("animation-name", "none");
+    await page.waitForFunction(() => document.documentElement.getAttribute("data-intro") === "done", null, { timeout: 4000 });
     await expect(page.locator(".neural-intro")).toBeHidden();
     await reduced.close();
     const deep = await browser.newContext({ reducedMotion: "no-preference" });
@@ -71,6 +76,22 @@ test.describe("Neural Awakening", () => {
     await deepPage.goto(origin + "/#contacto");
     expect(await introState(deepPage)).toBeNull();
     await deep.close();
+  });
+
+  test("mobile shows intro even with low memory, save data and blocked storage", async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 375, height: 667 }, hasTouch: true, reducedMotion: "no-preference" });
+    await context.addInitScript(() => {
+      Object.defineProperty(navigator, "deviceMemory", { configurable: true, value: 1 });
+      Object.defineProperty(navigator, "connection", { configurable: true, value: { saveData: true } });
+      Object.defineProperty(window, "sessionStorage", { configurable: true, get() { throw new Error("blocked"); } });
+    });
+    const page = await context.newPage();
+    await page.goto(origin + "/");
+    expect(await introState(page)).toBe("play");
+    await expect(page.locator(".neural-intro")).toBeVisible();
+    await page.waitForFunction(() => document.documentElement.getAttribute("data-intro") === "done", null, { timeout: 4000 });
+    await expect(page.locator(".neural-intro")).toBeHidden();
+    await context.close();
   });
 
   test("without JavaScript the homepage is complete and the overlay never shows", async ({ browser }) => {

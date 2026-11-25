@@ -27,7 +27,7 @@
   html[data-intro="play"] .hero .hero-product { animation: ni-rise 700ms 1500ms var(--ni-out, ease-out) both; }
   html[data-intro="play"] .hero .hero-strip { animation: ni-rise 600ms 1580ms var(--ni-out, ease-out) both; }
   /* The privacy banner waits for the page instead of appearing mid-transition. */
-  html[data-intro="play"] .cookie-banner { visibility: hidden; }
+  html[data-intro="play"] .cookie-banner { animation: ni-consent-hold 1800ms step-end both; }
 }
 .neural-intro { display: none; }
 
@@ -114,4 +114,26 @@
 @keyframes ni-fly {
   from { transform: none; opacity: 1; }
   to { transform: translate(var(--fx), var(--fy)) scale(var(--fs)); opacity: var(--fo); }
+}
+
+/* Keep the same brand presentation for users who request reduced motion, with no
+ * moving or fading elements. Only a discrete visibility change ends the intro. */
+@media (prefers-reduced-motion: reduce) {
+  html[data-intro="play"] .neural-intro {
+    display: block !important; position: fixed; inset: 0; z-index: 1000;
+    animation: ni-exit 1800ms linear both !important;
+  }
+  html[data-intro="skip"] .neural-intro { display: none !important; }
+  .neural-intro *, .neural-intro *::before, .neural-intro *::after {
+    animation: none !important; transition: none !important;
+  }
+  .ni-pulse, .ni-strokes, .ni-nodes { display: none; }
+  .ni-iso, .ni-letter { opacity: 1; }
+  .ni-logo, .ni-tagline, .ni-tagline > span { opacity: 1; transform: none; }
+}
+@keyframes ni-consent-hold { from { visibility: hidden; } to { visibility: visible; } }
+@media (max-width: 600px) {
+  .ni-logo { width: min(76vw, 380px); }
+  .ni-tagline { font-size: clamp(15px, 4vw, 19px); }
+  .ni-skip { right: 18px; bottom: 18px; right: max(18px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); }
 }

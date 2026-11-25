@@ -1,5 +1,8 @@
 # Cambios
 
+## Neural Awakening — corrección móvil
+- La presentación se reproduce en cada carga completa de la portada, sin consultar memoria, ahorro de datos ni sessionStorage. Movimiento reducido muestra logo y eslogan estáticos; se mantienen enlaces directos a secciones y navegación interna sin interrupciones. El reloj de la animación se mide desde CSS, con limpieza independiente de React.
+
 ## 2026-11-24 — Neural Awakening, SEO y GEO
 
 - Introducción animada de 1,8 s en la primera visita a la portada de cada sesión, construida con el logotipo vectorial oficial. Solo CSS más un script en línea mínimo; sin JavaScript, con movimiento reducido, ahorro de datos, enlaces a secciones o navegación interna no se reproduce. Se puede omitir con cualquier tecla, clic o el botón «Omitir introducción».

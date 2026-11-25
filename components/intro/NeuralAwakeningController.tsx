@@ -20,7 +20,10 @@ export function NeuralAwakeningController() {
     if (root.getAttribute(INTRO_ATTRIBUTE) !== "play") return;
     const overlay = document.querySelector<HTMLElement>("[data-neural-intro]");
     if (!overlay) { root.setAttribute(INTRO_ATTRIBUTE, "done"); return; }
-    const elapsed = performance.now() - (window.__pcIntroStart ?? performance.now());
+    // Measure the visible CSS timeline rather than the early boot script: slow mobile parsing must not consume the animation budget.
+    const timeline = typeof overlay.getAnimations === "function" ? overlay.getAnimations()[0] : undefined;
+    const elapsed = typeof timeline?.currentTime === "number" ? Math.max(0, timeline.currentTime) : 0;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let finished = false;
     const timers: number[] = [];
 
@@ -54,7 +57,7 @@ export function NeuralAwakeningController() {
     // navbar logo is actually laid out. Otherwise the CSS default (a gentle fade in place) is used.
     const logo = overlay.querySelector<HTMLElement>(".ni-logo");
     const target = document.querySelector<HTMLElement>(".site-header .brand-logo");
-    if (logo && target && elapsed < INTRO_FLIGHT_DEADLINE_MS) {
+    if (!reduced && logo && target && elapsed < INTRO_FLIGHT_DEADLINE_MS) {
       const from = logo.getBoundingClientRect();
       const to = target.getBoundingClientRect();
       if (from.width > 0 && to.width > 0 && to.bottom > 0 && to.top < window.innerHeight) {
