@@ -13,10 +13,10 @@ export function Capabilities() {
       const next = event.key === "ArrowDown" ? (index + 1) % modules.length : event.key === "ArrowUp" ? (index + modules.length - 1) % modules.length : event.key === "Home" ? 0 : event.key === "End" ? modules.length - 1 : null;
       if (next !== null) { event.preventDefault(); setIndex(next); refs.current[next]?.focus(); }
     }}>{modules.map((m, i) => <button key={m.id} ref={el => { refs.current[i] = el; }} role="tab" id={"tab-" + m.id} aria-controls={"panel-" + m.id} aria-selected={i === index} tabIndex={i === index ? 0 : -1} onClick={() => setIndex(i)}><Icon name={m.icon} size={20}/><span>{m.name}</span><Icon name="arrow" size={16}/></button>)}</div>
-    {modules.map((m, i) => <article key={m.id} role="tabpanel" id={"panel-" + m.id} aria-labelledby={"tab-" + m.id} hidden={index !== i} tabIndex={0} className="module-panel">
+    {modules.map((m, i) => <div key={m.id} role="tabpanel" id={"panel-" + m.id} aria-labelledby={"tab-" + m.id} hidden={index !== i} tabIndex={0} className="module-panel">
       <span className="module-status"><span className="status-dot"/>{m.status}</span><span className="module-large-icon"><Icon name={m.icon} size={40}/></span><h3>{m.name}</h3><p>{m.description}</p>
       <div className="module-example"><span>UN MOMENTO EN LA VIDA REAL</span><blockquote>“{m.example}”</blockquote></div>
       <button className="text-action" onClick={() => { window.dispatchEvent(new CustomEvent("psicocare:module", { detail: active.id })); document.getElementById("app-movil")?.scrollIntoView({ behavior: "instant" }); }}>{m.action}<Icon name="arrow" size={18}/></button>
-    </article>)}</div>
+    </div>)}</div>
   </Container></section>;
 }

@@ -1,11 +1,11 @@
 export const site = {
   name: "Psico Care", tagline: "Tu bienestar importa.",
-  description: "Explora Psico Care: una aplicación en desarrollo para acompañarte con conversaciones guiadas, reflexiones, ejercicios y práctica a tu ritmo.",
+  description: "Psico Care es una app de acompañamiento emocional para jóvenes, hecha en Nicaragua: conversa con NeuroIA, reflexiona, respira y practica a tu ritmo. No sustituye la atención profesional.",
   email: "contacto.Psicocare26@gmail.com", phone: "+505 8970-0990", phoneHref: "+50589700990",
 };
 export const nav = [
   { label: "Producto", href: "/#producto" }, { label: "Funciones", href: "/#funciones" },
-  { label: "App móvil", href: "/#app-movil" }, { label: "Encuestas", href: "/encuestas" },
+  { label: "App móvil", href: "/#app-movil" }, { label: "NeuroIA", href: "/neuroia" }, { label: "Encuestas", href: "/encuestas" },
   { label: "Seguridad", href: "/seguridad" }, { label: "Educación", href: "/educacion" },
 ];
 export const modules = [
